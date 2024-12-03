@@ -1,3 +1,5 @@
+package data_structure.arrays;
+
 import java.util.Scanner;
 
 public class ArrayHandler {
