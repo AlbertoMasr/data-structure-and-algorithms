@@ -71,4 +71,73 @@ public class LinkedList {
         temp.next = newNode;
 
     }
+
+    public void updateAnElement(int data, int position) {
+        if(position < 0) {
+            throw new IndexOutOfBoundsException("Position out of bounds, must be greater than 0");
+        }
+
+        if(head == null) {
+            throw new LinkedListEmptyException("Empty linked list, nothing to update");
+        }
+
+        Node temp = head;
+
+        int counter = 0;
+        while(counter < position && temp.next != null) {
+            temp = temp.next;
+            counter++;
+        }
+
+        if(temp.next == null) {
+            throw new IndexOutOfBoundsException("Position out of bounds, position not found");
+        }
+
+        temp.data = data;
+    }
+
+    public void deleteAnElement(int position) {
+        if(position < 0) {
+            throw new IndexOutOfBoundsException("Position out of bounds, must be greater than 0");
+        }
+
+        if(head == null) {
+            throw new LinkedListEmptyException("Empty linked list, nothing to delete");
+        }
+
+        Node temp = head;
+
+        int counter = 0;
+        
+        while(counter < position - 1 && temp.next != null) {
+            temp = temp.next;
+            counter++;
+        }
+
+        if(temp.next == null) {
+            throw new IndexOutOfBoundsException("Position out of bounds, position not found");
+        }
+
+        temp.next = temp.next.next;
+    }
+
+    public void reversed() {
+        if(head == null) {
+            System.out.println("Linked list is empty, nothing to reverse");
+            return;
+        }
+
+        Node prev = null;
+        Node current = head;
+
+        while(current !=  null) {
+            Node next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        head = prev;
+
+    }
 }
