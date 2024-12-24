@@ -1,4 +1,6 @@
-package data_structure.linked_lists;
+package data_structure.linked_lists.singly;
+
+import data_structure.linked_lists.LinkedListEmptyException;
 
 public class LinkedList {
     Node head;
@@ -22,6 +24,15 @@ public class LinkedList {
         System.out.println("null");
     }
 
+    public void readRecursive(Node headPointer) {
+        if(headPointer == null) {
+            System.out.println("null");
+            return;
+        }
+        System.out.print(headPointer.data +" -> ");
+        readRecursive(headPointer.next);
+    }
+
     public void addElementAtBegining(int data) {
         Node newNode = new Node(data);
         newNode.next = head;
@@ -42,13 +53,13 @@ public class LinkedList {
         Node newNode = new Node(data);
         Node temp = head;
         
-        for(int i = 0; i < position - 1 && temp.next != null; i++) {
+        for(int i = 0; i < position && temp.next != null; i++) {
             temp = temp.next;
         }
 
-        if(temp.next == null) {
-            throw new IndexOutOfBoundsException("Position out of bounds");
-        }
+        // if(temp.next == null) {
+        //     throw new IndexOutOfBoundsException("Position out of bounds");
+        // }
 
         newNode.next = temp.next;
         temp.next = newNode;
@@ -56,12 +67,12 @@ public class LinkedList {
     }
 
     public void addElementAtEnd(int data) {
-        Node newNode = new Node(data);
 
         if(head == null) {
             addElementAtBegining(data);
         }
 
+        Node newNode = new Node(data);
         Node temp = head;
 
         while(temp.next != null) {
@@ -89,9 +100,9 @@ public class LinkedList {
             counter++;
         }
 
-        if(temp.next == null) {
-            throw new IndexOutOfBoundsException("Position out of bounds, position not found");
-        }
+        // if(temp.next == null) {
+        //     throw new IndexOutOfBoundsException("Position out of bounds, position not found");
+        // }
 
         temp.data = data;
     }
@@ -103,6 +114,11 @@ public class LinkedList {
 
         if(head == null) {
             throw new LinkedListEmptyException("Empty linked list, nothing to delete");
+        }
+
+        if(position == 0) {
+            head = head.next;
+            return;
         }
 
         Node temp = head;
@@ -118,7 +134,8 @@ public class LinkedList {
             throw new IndexOutOfBoundsException("Position out of bounds, position not found");
         }
 
-        temp.next = temp.next.next;
+        Node temp2 = temp.next;
+        temp.next = temp2.next;
     }
 
     public void reversed() {
@@ -140,4 +157,3 @@ public class LinkedList {
         head = prev;
 
     }
-}

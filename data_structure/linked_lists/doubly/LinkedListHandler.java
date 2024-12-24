@@ -1,5 +1,6 @@
-package data_structure.linked_lists;
+package data_structure.linked_lists.doubly;
 
+import data_structure.linked_lists.LinkedListEmptyException;
 import java.util.Scanner;
 
 public class LinkedListHandler {
@@ -8,6 +9,10 @@ public class LinkedListHandler {
 
     public static void read(LinkedList linkedList) {
         linkedList.read();
+    }
+
+    public static void readRecursive(LinkedList linkedList) {
+        linkedList.readRecursive(linkedList.head);
     }
 
     public static void addElementAtBegining(LinkedList linkedList) {
@@ -107,15 +112,25 @@ public class LinkedListHandler {
         linkedList.reversed();
     }
 
+    public static void reversedRecursive(LinkedList linkedList) {
+        try {
+            linkedList.reversedRecursive(linkedList.head);
+        } catch (LinkedListEmptyException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
     public static void showMenu() {
         System.out.println("\n-----------------------------------");
         System.out.println("1. Read linked list");
-        System.out.println("2. Insert an element at the begining of linked list");
-        System.out.println("3. Insert an element at N position of linked list");
-        System.out.println("4. Insert an element at the end of linked list");
-        System.out.println("5. Update an element of linked list");
-        System.out.println("6. Delete an element of linked list");
-        System.out.println("7. Reversed linked list");
+        System.out.println("2. Read recursive linked list");
+        System.out.println("3. Insert an element at the begining of linked list");
+        System.out.println("4. Insert an element at N position of linked list");
+        System.out.println("5. Insert an element at the end of linked list");
+        System.out.println("6. Update an element of linked list");
+        System.out.println("7. Delete an element of linked list");
+        System.out.println("8. Reversed linked list");
+        System.out.println("9. Reversed recursive linked list");
         System.out.println("-----------------------------------\n");
     }
 
@@ -134,12 +149,14 @@ public class LinkedListHandler {
 
                 switch (option) {
                     case 1 -> LinkedListHandler.read(linkedList);
-                    case 2 -> LinkedListHandler.addElementAtBegining(linkedList);
-                    case 3 -> LinkedListHandler.addElementAtNPosition(linkedList);
-                    case 4 -> LinkedListHandler.addElementAtEnd(linkedList);
-                    case 5 -> LinkedListHandler.updateAnElement(linkedList);
-                    case 6 -> LinkedListHandler.deleteAnElement(linkedList);
-                    case 7 -> LinkedListHandler.reversed(linkedList);
+                    case 2 -> LinkedListHandler.readRecursive(linkedList);
+                    case 3 -> LinkedListHandler.addElementAtBegining(linkedList);
+                    case 4 -> LinkedListHandler.addElementAtNPosition(linkedList);
+                    case 5 -> LinkedListHandler.addElementAtEnd(linkedList);
+                    case 6 -> LinkedListHandler.updateAnElement(linkedList);
+                    case 7 -> LinkedListHandler.deleteAnElement(linkedList);
+                    case 8 -> LinkedListHandler.reversed(linkedList);
+                    case 9 -> LinkedListHandler.reversedRecursive(linkedList);
                     default -> System.out.println("Option doesn't support");
                 }
             } catch (NumberFormatException e) {
