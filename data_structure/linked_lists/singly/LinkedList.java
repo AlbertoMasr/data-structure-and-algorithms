@@ -157,3 +157,22 @@ public class LinkedList {
         head = prev;
 
     }
+
+    public void reversedRecursive(Node headPointer) {
+        if(headPointer == null) {
+            throw new LinkedListEmptyException("Empty linked list, nothing to delete");
+        }
+
+        if(headPointer.next == null) {
+            head = headPointer;
+            return;
+        }
+
+        reversedRecursive(headPointer.next);
+        Node nextNode = headPointer.next;
+        nextNode.next = headPointer;
+        headPointer.next = null;
+
+    }
+
+}

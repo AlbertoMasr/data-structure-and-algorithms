@@ -154,4 +154,16 @@ public class LinkedListHandler {
                     case 4 -> LinkedListHandler.addElementAtNPosition(linkedList);
                     case 5 -> LinkedListHandler.addElementAtEnd(linkedList);
                     case 6 -> LinkedListHandler.updateAnElement(linkedList);
-                    case 7 -> LinkedListHandler.deleteAnElement(linkedList
+                    case 7 -> LinkedListHandler.deleteAnElement(linkedList);
+                    case 8 -> LinkedListHandler.reversed(linkedList);
+                    case 9 -> LinkedListHandler.reversedRecursive(linkedList);
+                    default -> System.out.println("Option doesn't support");
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("Please, choose a right option.");
+            }
+        } while(option != SALIR);
+
+        scanner.close();
+    }
+}
