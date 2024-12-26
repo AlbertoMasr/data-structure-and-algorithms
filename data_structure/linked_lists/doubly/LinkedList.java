@@ -80,23 +80,65 @@ public class LinkedList {
     }
 
     public void addElementAtEnd(int newValue) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if(head == null) {
+            addElementAtBegining(newValue);
+            return;
+        }
+
+        Node newNode = new Node(newValue);
+        Node temp = head;
+        while(temp.next != null) {
+            temp = temp.next;
+        }
+
+        temp.next = newNode;
+        newNode.prev = temp;
     }
 
-    public void removeElementAtBegining() {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public void updateAnElement(int newValue, int position) {
+        if(head == null) {
+            throw new LinkedListEmptyException("The linked list is empty, nothing to update");
+        }
+
+        Node temp = head;
+        int counter = 0;
+
+        while(counter < position && temp.next != null) {
+            temp = temp.next;
+            counter++;
+        }
+
+        if(temp == null) {
+            throw new IndexOutOfBoundsException("The position is out of bounds");
+        }
+
+        temp.data = newValue;
     }
 
-    public void removeElementAtNPosition(int position) {
-        throw new UnsupportedOperationException("Not implemented yet");
-    }
+    public void deleteAnElement(int position) {
+        if(head == null) {
+            throw new LinkedListEmptyException("The linked list is empty, nothing to remove");
+        }
 
-    public void removeElementAtEnd() {
-        throw new UnsupportedOperationException("Not implemented yet");
-    }
+        if(position == 0) {
+            head = head.next;
+            return;
+        }
 
-    public void updateAnElement(int position, int newValue) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Node temp = head;
+        int counter = 0;
+        while(counter < position - 1 && temp.next != null) {
+            temp = temp.next;
+            counter++;
+        }
+
+        if(temp.next == null) {
+            throw new IndexOutOfBoundsException("The position is out of bounds");
+        }
+
+        Node temp2 = temp.next;
+        temp.next = temp2.next;
+
     }
 
     public void reversed() {
