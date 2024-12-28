@@ -60,4 +60,15 @@ public class Queue {
             front = -1;
             rear = -1;
         } else {
-          
+            front = (front + 1) % maxSize;
+        }
+    }
+
+    public void front() {
+        if(isEmpty()) {
+            throw new IndexOutOfBoundsException("Queue is empty");
+        }
+
+        System.out.println("Front element is: " + queue[front]);
+    }
+}
