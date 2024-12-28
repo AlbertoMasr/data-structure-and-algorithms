@@ -99,4 +99,15 @@ public class StackHandler {
                     case 2 -> StackHandler.push(stack);
                     case 3 -> StackHandler.pop(stack);
                     case 4 -> StackHandler.top(stack);
- 
+                    case 5 -> StackHandler.isEmpty(stack);
+                    case 6 -> StackHandler.reversed(stack);
+                    default -> System.out.println("Option doesn't support");
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("Please, choose a right option.");
+            }
+        } while(option != SALIR);
+
+        scanner.close();
+    }
+}

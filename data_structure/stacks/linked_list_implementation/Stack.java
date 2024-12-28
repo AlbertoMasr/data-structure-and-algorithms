@@ -66,4 +66,20 @@ public class Stack {
 
         Node temp = top;
         while(temp != null) {
-          
+            s.push(temp);
+            temp = temp.next;
+        }
+
+        temp = s.peek();
+        top = temp;
+        s.pop();
+
+        while(!s.isEmpty()) {
+            temp.next = s.peek();
+            s.pop();
+            temp = temp.next;
+        }
+
+        temp.next = null;
+    }
+}
