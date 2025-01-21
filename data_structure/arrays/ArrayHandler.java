@@ -112,6 +112,101 @@ public class ArrayHandler {
 
     }
 
+    public void print2DArrayInSpiralForm() {
+        int[][] matrix = {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 15, 16}
+        };
+
+        int t = 0;
+        int b = matrix.length - 1;
+        int l = 0;
+        int r = matrix[0].length - 1;
+        int dir = 0;
+
+        while(t <= b && l <= r) {
+            if(dir == 0) {
+                for(int i = l; i <= r; i++) {
+                    System.out.print(matrix[t][i] +", ");
+                }
+                t++;
+                dir = 1;
+            } else if(dir == 1) {
+                for(int i = t; i <= b; i++) {
+                    System.out.print(matrix[i][r] +", ");
+                }
+                r--;
+                dir = 2;
+            } else if(dir == 2) {
+                for(int i = r; i >= l; i--) {
+                    System.out.print(matrix[b][i] +", ");
+                }
+                b--;
+                dir = 3;
+            } else if(dir == 3) {
+                for(int i = b; i >= t; i--) {
+                    System.out.print(matrix[i][l] +", ");
+                }
+                l++;
+                dir = 0;
+            }
+        }
+    }
+
+    private int maxSumSubarray(int[] arr, int n) {
+        if(n == 1) {
+            return arr[0];
+        }
+
+        int m = n / 2;
+        int leftSide = maxSumSubarray(arr, m);
+        int rightSide = maxSumSubarray(arr , n - m);
+        int leftSum = Integer.MIN_VALUE;
+        int rightSum = Integer.MIN_VALUE;
+        
+        int sum = 0;
+        for(int i = (m - 1); i >= 0; i--) {
+            sum += arr[i];
+            leftSum = Math.max(leftSum, sum);
+        }
+
+        sum = 0;
+        for(int i = m; i < n; i++) {
+            sum += arr[i];
+            rightSum = Math.max(rightSum, sum);
+        }
+
+        int ans = Math.max(leftSide, rightSide);
+
+        return Math.max(ans, leftSum + rightSum);
+    }
+
+    public void sumSubarrayDivideAndConquer() {
+        // int[] arr = {3, -1, 5, -1};
+        int[] arr = {1, -3, 2, -5, 7, 6, -1, -4, 11, -23};
+        int maxSumSubarray = maxSumSubarray(arr, arr.length);
+        System.out.println("Max sum subarray: "+ maxSumSubarray);
+    }
+
+    public void sumSubarrayKadane() {
+        // int[] arr = {3, -1, 5, -1};
+        int[] arr = {1, -3, 2, -5, 7, 6, -1, -4, 11, -23};
+        int ans = 0;
+        int sum = 0;
+
+        for(int i = 0; i < arr.length; i++) {
+            if(sum + arr[i] > 0) {
+                sum += arr[i];
+            } else {
+                sum = 0;
+            }
+            ans = Math.max(ans, sum);
+        }
+        System.out.println("Max sum subarray: "+ ans);
+    }
+
     public static void showMenu() {
         System.out.println("-----------------------------------");
         System.out.println("1. Read array");
@@ -119,6 +214,9 @@ public class ArrayHandler {
         System.out.println("3. Read an element of array");
         System.out.println("4. Update an element of array");
         System.out.println("5. Delete an element of array");
+        System.out.println("6. Print 2D element in spiral form");
+        System.out.println("7. Sum subarray divide and conquer");
+        System.out.println("8. Sum subarray Kadane's algorithm");
         System.out.println("-----------------------------------");
     }
 
@@ -141,6 +239,9 @@ public class ArrayHandler {
                     case 3 -> arrayHandler.readAnElement();
                     case 4 -> arrayHandler.updateAnElement();
                     case 5 -> arrayHandler.deleteAnElement();
+                    case 6 -> arrayHandler.print2DArrayInSpiralForm();
+                    case 7 -> arrayHandler.sumSubarrayDivideAndConquer();
+                    case 8 -> arrayHandler.sumSubarrayKadane();
                     default -> System.out.println("Option doesn't support");
                 }
             } catch (NumberFormatException e) {

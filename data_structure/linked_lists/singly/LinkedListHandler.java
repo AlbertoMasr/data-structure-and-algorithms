@@ -120,6 +120,53 @@ public class LinkedListHandler {
         }
     }
 
+    private static void findMergePoint(LinkedList l1, LinkedList l2) {
+        Node mergePoint = l1.findMergePoint(l1.head, l2.head);
+        if(mergePoint == null) {
+            System.out.println("There is no merge point");
+        } else {
+            System.out.println("Merge point is: " + mergePoint.data);
+        }
+    }
+
+    public static void findMergePoint() {
+
+        // MERGE POINT IN 6
+        // LinkedList linkedList1 = new LinkedList();
+        // Node node1 = linkedList1.addElementAtEndAndReturnNode(1);
+        // Node node3 = linkedList1.addElementAtEndAndReturnNode(3);
+        // Node node5 = linkedList1.addElementAtEndAndReturnNode(5);
+        // Node node6 = linkedList1.addElementAtEndAndReturnNode(6);
+        // Node node7 = linkedList1.addElementAtEndAndReturnNode(7);
+        // Node node9 = linkedList1.addElementAtEndAndReturnNode(9);
+
+        // linkedList1.read();
+
+        // LinkedList linkedList2 = new LinkedList();
+        // Node node2 = linkedList2.addElementAtEndAndReturnNode(2);
+        // Node node4 = linkedList2.addElementAtEndAndReturnNode(4);
+        // node4.next = node6;
+
+        // linkedList2.read();
+
+        // NO MERGE POINT
+        LinkedList linkedList1 = new LinkedList();
+        Node node1 = linkedList1.addElementAtEndAndReturnNode(1);
+        Node node2 = linkedList1.addElementAtEndAndReturnNode(2);
+        Node node3 = linkedList1.addElementAtEndAndReturnNode(3);
+
+        linkedList1.read();
+
+        LinkedList linkedList2 = new LinkedList();
+        Node node4 = linkedList2.addElementAtEndAndReturnNode(4);
+        Node node5 = linkedList2.addElementAtEndAndReturnNode(5);
+        Node node6 = linkedList2.addElementAtEndAndReturnNode(6);
+
+        linkedList2.read();
+
+        LinkedListHandler.findMergePoint(linkedList1, linkedList2);
+    }
+
     public static void showMenu() {
         System.out.println("\n-----------------------------------");
         System.out.println("1. Read linked list");
@@ -131,6 +178,7 @@ public class LinkedListHandler {
         System.out.println("7. Delete an element of linked list");
         System.out.println("8. Reversed linked list");
         System.out.println("9. Reversed recursive linked list");
+        System.out.println("10. Find merge point of two linked lists");
         System.out.println("-----------------------------------\n");
     }
 
@@ -157,6 +205,7 @@ public class LinkedListHandler {
                     case 7 -> LinkedListHandler.deleteAnElement(linkedList);
                     case 8 -> LinkedListHandler.reversed(linkedList);
                     case 9 -> LinkedListHandler.reversedRecursive(linkedList);
+                    case 10 -> LinkedListHandler.findMergePoint();
                     default -> System.out.println("Option doesn't support");
                 }
             } catch (NumberFormatException e) {

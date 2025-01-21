@@ -83,6 +83,25 @@ public class LinkedList {
 
     }
 
+    public Node addElementAtEndAndReturnNode(int data) {
+
+        if(head == null) {
+            addElementAtBegining(data);
+        }
+
+        Node newNode = new Node(data);
+        Node temp = head;
+
+        while(temp.next != null) {
+            temp = temp.next;
+        }
+
+        temp.next = newNode;
+
+        return newNode;
+
+    }
+
     public void updateAnElement(int data, int position) {
         if(position < 0) {
             throw new IndexOutOfBoundsException("Position out of bounds, must be greater than 0");
@@ -173,6 +192,50 @@ public class LinkedList {
         nextNode.next = headPointer;
         headPointer.next = null;
 
+    }
+
+    private int length(Node headPointer) {
+        if(headPointer == null) {
+            return 0;
+        }
+
+        int counter = 0;
+
+        Node temp = headPointer;
+        while(temp != null) {
+            counter++;
+            temp = temp.next;
+        }
+
+        return counter;
+    }
+
+    public Node findMergePoint(Node head1, Node head2) {
+        int m = length(head1);
+        int n = length(head2);
+        int d = n - m;
+
+        if(m > n) {
+            Node temp = head1;
+            head1 = head2;
+            head2 = temp;
+            d = m - n;
+        }
+
+        for(int i = 0; i < d; i++) {
+            head2 = head2.next;
+        }
+
+        while(head1 != null && head2 != null) {
+            if(head1 == head2) {
+                return head1;
+            }
+
+            head1 = head1.next;
+            head2 = head2.next;
+        }
+
+        return null;
     }
 
 }
